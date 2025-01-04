@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NFTMetadataCard from "./components/NFTMetadataCard";
 import Pagination from "./components/Pagination";
 import getAuthor from "./utils/getAuthor";
-import { lightTheme, darkTheme } from "./styles/styles";
+import { lightTheme, darkTheme } from "./styles/styles"; // Update import
 
 const NFTMarketplace = () => {
   const [nfts, setNfts] = useState([]);
@@ -14,12 +14,12 @@ const NFTMarketplace = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const nftsPerPage = 6;
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Fetch NFT data
+  const theme = isDarkMode ? darkTheme : lightTheme;
+
   useEffect(() => {
     const loadIndexAndMetadata = async () => {
       setIsLoading(true);
@@ -65,11 +65,9 @@ const NFTMarketplace = () => {
     loadIndexAndMetadata();
   }, []);
 
-  // Pagination handlers
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
 
-  // Search and sort handlers
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
@@ -78,7 +76,6 @@ const NFTMarketplace = () => {
   const handleSort = (event) => setSortBy(event.target.value);
   const handleSortOrder = (event) => setSortOrder(event.target.value);
 
-  // Filter and sort NFTs
   const filteredAndSortedNFTs = nfts
     .filter((nft) => {
       const name = nft.metadata.name || "Unnamed NFT";
@@ -106,25 +103,19 @@ const NFTMarketplace = () => {
       return sortOrder === "asc" ? (valueA > valueB ? 1 : -1) : valueA < valueB ? 1 : -1;
     });
 
-  // Paginate NFTs
   const paginatedNFTs = filteredAndSortedNFTs.slice(
     (currentPage - 1) * nftsPerPage,
     currentPage * nftsPerPage
   );
 
-  // Theme styles
-  const theme = isDarkMode ? darkTheme : lightTheme;
-
   return (
     <div style={theme.container}>
-      {/* Dark Mode Toggle */}
       <div style={{ textAlign: "right", marginBottom: "20px" }}>
         <button onClick={toggleDarkMode} style={theme.toggleButton}>
           {isDarkMode ? "Light Mode" : "Dark Mode"}
         </button>
       </div>
 
-      {/* Controls */}
       <div style={theme.controls}>
         <input
           type="text"
@@ -144,31 +135,27 @@ const NFTMarketplace = () => {
         </select>
       </div>
 
-      {/* Loading State */}
       {isLoading ? (
         <div style={theme.loadingSpinner}>Loading...</div>
       ) : (
         <>
-          {/* NFT Grid */}
           <div style={theme.nftGrid}>
             {paginatedNFTs.map((nft) => (
               <NFTMetadataCard
                 key={nft.tokenId}
                 metadata={nft.metadata}
                 tokenId={nft.tokenId}
-                theme={theme}
+                theme={isDarkMode ? "dark" : "light"} // Pass the theme
               />
             ))}
           </div>
-
-          {/* Pagination */}
           <Pagination
             currentPage={currentPage}
             nextPage={nextPage}
             prevPage={prevPage}
             paginatedNFTs={paginatedNFTs}
             nftsPerPage={nftsPerPage}
-            theme={theme}
+            theme={isDarkMode ? "dark" : "light"} // Pass the theme
           />
         </>
       )}
