@@ -99,18 +99,28 @@ const styles = {
       alignItems: "center",
       zIndex: 1000,
     },
-    popupContent: {
-      backgroundColor: "#fff",
-      borderRadius: "8px",
-      padding: "20px",
-      maxWidth: "500px",
-      width: "90%",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-    },
+    ppopupContent: {
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        padding: "20px",
+        maxWidth: "500px",
+        width: "90%",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        maxHeight: "80vh", // Limit the height of the popup
+        overflow: "hidden", // Ensure the content doesn't overflow
+        display: "flex",
+        flexDirection: "column",
+      },
+      scrollableDescription: {
+        flex: 1, // Take up remaining space
+        overflowY: "auto", // Enable vertical scrolling
+        marginBottom: "16px", // Add some spacing
+      },
+
     popupDescription: {
       fontSize: "1rem",
       color: "#333",
-      margin: "16px 0",
+      margin: 0,
     },
     interactiveIframe: {
       width: "100%",
