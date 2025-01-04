@@ -141,18 +141,8 @@ const lightTheme = {
       flex: 1,
       overflowY: "auto",
       marginBottom: "16px",
-      scrollbarWidth: "thin",
-      scrollbarColor: "#888 transparent",
-      "&::-webkit-scrollbar": {
-        width: "8px",
-      },
-      "&::-webkit-scrollbar-thumb": {
-        backgroundColor: "#888",
-        borderRadius: "4px",
-      },
-      "&::-webkit-scrollbar-track": {
-        backgroundColor: "transparent",
-      },
+      scrollbarWidth: "thin", // Standard property for Firefox
+      scrollbarColor: "#888 transparent", // Standard property for Firefox
     },
     popupDescription: {
       fontSize: "1rem",
