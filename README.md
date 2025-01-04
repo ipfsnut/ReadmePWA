@@ -57,28 +57,6 @@ The app caches book metadata and static assets for offline use.
 
 If you lose internet connectivity, you can still browse previously loaded books.
 
-## Project Structure
-
-readme-books-pwa/
-├── public/                  # Static assets and index.html
-│   ├── index.html
-│   ├── manifest.json
-│   └── icon-192x192.png
-├── src/                     # Source code
-│   ├── components/          # React components
-│   │   ├── NFTMetadataCard.js
-│   │   ├── Pagination.js
-│   │   └── DescriptionPopup.js
-│   ├── styles/              # CSS-in-JS styles
-│   │   └── styles.js
-│   ├── utils/               # Utility functions
-│   │   └── getAuthor.js
-│   ├── App.js               # Main application component
-│   ├── index.js             # Entry point
-│   └── serviceWorker.js     # Service worker registration
-├── package.json             # Project dependencies
-└── README.md                # Project documentation
-
 ## Contributing
 Contributions are welcome! Follow these steps:
 
