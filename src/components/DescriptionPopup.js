@@ -1,14 +1,14 @@
 import React from "react";
 import cleanDescription from "../utils/cleanDescription";
-import styles from "../styles/styles";
+import { lightTheme, darkTheme } from "../styles/styles"; // Update import
 
-const DescriptionPopup = ({ description, interactiveUrl, onClose }) => {
+const DescriptionPopup = ({ description, interactiveUrl, onClose, theme }) => {
   const cleanedDescription = cleanDescription(description);
+  const styles = theme === "dark" ? darkTheme : lightTheme; // Use the correct theme
 
   return (
     <div style={styles.popupOverlay}>
       <div style={styles.popupContent}>
-        {/* Iframe Section */}
         {interactiveUrl && (
           <div style={styles.iframeContainer}>
             <iframe
@@ -22,12 +22,10 @@ const DescriptionPopup = ({ description, interactiveUrl, onClose }) => {
           </div>
         )}
 
-        {/* Description Section */}
         <div style={styles.descriptionContainer}>
           <p style={styles.popupDescription}>{cleanedDescription}</p>
         </div>
 
-        {/* Buttons Section */}
         <div style={styles.buttonContainer}>
           {interactiveUrl && (
             <button

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import NFTMetadataCard from "./components/NFTMetadataCard";
 import Pagination from "./components/Pagination";
-import getAuthor from "./utils/getAuthor"; // Import as default
-import styles from "./styles/styles";
+import getAuthor from "./utils/getAuthor";
+import { lightTheme, darkTheme } from "./styles/styles";
 
 const NFTMarketplace = () => {
   const [nfts, setNfts] = useState([]);
@@ -11,8 +11,15 @@ const NFTMarketplace = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("tokenId");
   const [sortOrder, setSortOrder] = useState("desc");
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const nftsPerPage = 6;
 
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Fetch NFT data
   useEffect(() => {
     const loadIndexAndMetadata = async () => {
       setIsLoading(true);
@@ -58,9 +65,11 @@ const NFTMarketplace = () => {
     loadIndexAndMetadata();
   }, []);
 
+  // Pagination handlers
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
 
+  // Search and sort handlers
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
@@ -69,6 +78,7 @@ const NFTMarketplace = () => {
   const handleSort = (event) => setSortBy(event.target.value);
   const handleSortOrder = (event) => setSortOrder(event.target.value);
 
+  // Filter and sort NFTs
   const filteredAndSortedNFTs = nfts
     .filter((nft) => {
       const name = nft.metadata.name || "Unnamed NFT";
@@ -96,50 +106,69 @@ const NFTMarketplace = () => {
       return sortOrder === "asc" ? (valueA > valueB ? 1 : -1) : valueA < valueB ? 1 : -1;
     });
 
+  // Paginate NFTs
   const paginatedNFTs = filteredAndSortedNFTs.slice(
     (currentPage - 1) * nftsPerPage,
     currentPage * nftsPerPage
   );
 
+  // Theme styles
+  const theme = isDarkMode ? darkTheme : lightTheme;
+
   return (
-    <div style={styles.container}>
-      <div style={styles.controls}>
+    <div style={theme.container}>
+      {/* Dark Mode Toggle */}
+      <div style={{ textAlign: "right", marginBottom: "20px" }}>
+        <button onClick={toggleDarkMode} style={theme.toggleButton}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
+
+      {/* Controls */}
+      <div style={theme.controls}>
         <input
           type="text"
           placeholder="Search by name or author..."
           value={searchTerm}
           onChange={handleSearch}
-          style={styles.searchInput}
+          style={theme.searchInput}
         />
-        <select value={sortBy} onChange={handleSort} style={styles.sortSelect}>
+        <select value={sortBy} onChange={handleSort} style={theme.sortSelect}>
           <option value="tokenId">Sort by Token ID</option>
           <option value="name">Sort by Name</option>
           <option value="author">Sort by Author</option>
         </select>
-        <select value={sortOrder} onChange={handleSortOrder} style={styles.sortSelect}>
+        <select value={sortOrder} onChange={handleSortOrder} style={theme.sortSelect}>
           <option value="desc">Descending</option>
           <option value="asc">Ascending</option>
         </select>
       </div>
+
+      {/* Loading State */}
       {isLoading ? (
-        <div>Loading...</div>
+        <div style={theme.loadingSpinner}>Loading...</div>
       ) : (
         <>
-          <div style={styles.nftGrid}>
+          {/* NFT Grid */}
+          <div style={theme.nftGrid}>
             {paginatedNFTs.map((nft) => (
               <NFTMetadataCard
                 key={nft.tokenId}
                 metadata={nft.metadata}
                 tokenId={nft.tokenId}
+                theme={theme}
               />
             ))}
           </div>
+
+          {/* Pagination */}
           <Pagination
             currentPage={currentPage}
             nextPage={nextPage}
             prevPage={prevPage}
             paginatedNFTs={paginatedNFTs}
             nftsPerPage={nftsPerPage}
+            theme={theme}
           />
         </>
       )}

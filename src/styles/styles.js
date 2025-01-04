@@ -1,9 +1,11 @@
-const styles = {
+// Light Theme
+const lightTheme = {
     container: {
       fontFamily: "Arial, sans-serif",
       padding: "20px",
-      backgroundColor: "#f4f4f9",
-      color: "#333",
+      backgroundColor: "#fff",
+      color: "#000",
+      minHeight: "100vh",
     },
     controls: {
       marginBottom: "20px",
@@ -17,6 +19,8 @@ const styles = {
       borderRadius: "4px",
       border: "1px solid #ccc",
       flex: 1,
+      backgroundColor: "#fff",
+      color: "#000",
     },
     sortSelect: {
       padding: "8px",
@@ -24,6 +28,8 @@ const styles = {
       borderRadius: "4px",
       border: "1px solid #ccc",
       flex: 1,
+      backgroundColor: "#fff",
+      color: "#000",
     },
     nftGrid: {
       display: "grid",
@@ -32,7 +38,7 @@ const styles = {
       marginBottom: "20px",
     },
     nftCard: {
-      backgroundColor: "#fff",
+      backgroundColor: "#f9f9f9",
       borderRadius: "8px",
       padding: "20px",
       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
@@ -41,6 +47,11 @@ const styles = {
       alignItems: "center",
       textAlign: "center",
       width: "100%",
+      transition: "transform 0.2s, box-shadow 0.2s",
+      "&:hover": {
+        transform: "translateY(-4px)",
+        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.2)",
+      },
     },
     imageContainer: {
       width: "150px",
@@ -61,6 +72,8 @@ const styles = {
     title: {
       fontSize: "1.2rem",
       margin: "8px 0",
+      fontWeight: "bold",
+      color: "#000",
     },
     author: {
       fontSize: "0.9rem",
@@ -93,11 +106,12 @@ const styles = {
       left: 0,
       width: "100%",
       height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       zIndex: 1000,
+      overflow: "auto",
     },
     popupContent: {
       backgroundColor: "#fff",
@@ -106,27 +120,29 @@ const styles = {
       maxWidth: "500px",
       width: "90%",
       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-      maxHeight: "80vh", // Limit the height of the popup
-      overflow: "hidden", // Ensure the content doesn't overflow
+      maxHeight: "90vh",
+      overflowY: "auto",
       display: "flex",
       flexDirection: "column",
+      margin: "20px",
     },
     iframeContainer: {
-      flex: "0 0 auto", // Don't grow or shrink
-      marginBottom: "16px", // Add spacing below the iframe
+      flex: "0 0 auto",
+      marginBottom: "16px",
+      width: "100%",
     },
     interactiveIframe: {
       width: "100%",
-      height: "300px", // Fixed height for the iframe
+      height: "200px",
       border: "none",
       borderRadius: "8px",
     },
     descriptionContainer: {
-      flex: 1, // Take up remaining space
-      overflowY: "auto", // Enable vertical scrolling
-      marginBottom: "16px", // Add spacing below the description
-      scrollbarWidth: "thin", // For Firefox
-      scrollbarColor: "#888 transparent", // For Firefox
+      flex: 1,
+      overflowY: "auto",
+      marginBottom: "16px",
+      scrollbarWidth: "thin",
+      scrollbarColor: "#888 transparent",
       "&::-webkit-scrollbar": {
         width: "8px",
       },
@@ -140,13 +156,13 @@ const styles = {
     },
     popupDescription: {
       fontSize: "1rem",
-      color: "#333",
-      margin: 0, // Remove default margin
+      color: "#000",
+      margin: 0,
     },
     buttonContainer: {
       display: "flex",
       justifyContent: "flex-end",
-      gap: "10px", // Add spacing between buttons
+      gap: "10px",
     },
     expandButton: {
       background: "#28a745",
@@ -185,6 +201,67 @@ const styles = {
       gap: "10px",
       marginTop: "20px",
     },
+    toggleButton: {
+      background: "#007bff",
+      border: "none",
+      color: "#fff",
+      padding: "8px 16px",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontSize: "1rem",
+    },
+    loadingSpinner: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "200px",
+      fontSize: "1.5rem",
+      color: "#666",
+    },
   };
   
-  export default styles;
+  // Dark Theme
+  const darkTheme = {
+    ...lightTheme,
+    container: {
+      ...lightTheme.container,
+      backgroundColor: "#121212",
+      color: "#fff",
+    },
+    searchInput: {
+      ...lightTheme.searchInput,
+      backgroundColor: "#333",
+      color: "#fff",
+      border: "1px solid #555",
+    },
+    sortSelect: {
+      ...lightTheme.sortSelect,
+      backgroundColor: "#333",
+      color: "#fff",
+      border: "1px solid #555",
+    },
+    nftCard: {
+      ...lightTheme.nftCard,
+      backgroundColor: "#1e1e1e",
+      color: "#fff",
+    },
+    title: {
+      ...lightTheme.title,
+      color: "#fff",
+    },
+    author: {
+      ...lightTheme.author,
+      color: "#bbb",
+    },
+    popupContent: {
+      ...lightTheme.popupContent,
+      backgroundColor: "#1e1e1e",
+      color: "#fff",
+    },
+    popupDescription: {
+      ...lightTheme.popupDescription,
+      color: "#fff",
+    },
+  };
+  
+  export { lightTheme, darkTheme };

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import DescriptionPopup from "./DescriptionPopup";
-import getAuthor from "../utils/getAuthor"; // Import as default
-import styles from "../styles/styles";
+import getAuthor from "../utils/getAuthor";
+import { lightTheme, darkTheme } from "../styles/styles"; // Update import
 
-const NFTMetadataCard = ({ metadata, tokenId }) => {
+const NFTMetadataCard = ({ metadata, tokenId, theme }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [mediaError, setMediaError] = useState(false);
+  const styles = theme === "dark" ? darkTheme : lightTheme; // Use the correct theme
 
   const mediaSrc = mediaError
     ? metadata.interactive_url || metadata.animation_url || "placeholder.png"
@@ -39,7 +40,10 @@ const NFTMetadataCard = ({ metadata, tokenId }) => {
       <h1 style={styles.title}>{metadata.name || "Unnamed NFT"}</h1>
       <p style={styles.author}>By {authors}</p>
 
-      <button onClick={() => setShowPopup(true)} style={styles.descriptionLink}>
+      <button
+        onClick={() => setShowPopup(true)}
+        style={styles.descriptionLink}
+      >
         Readme
       </button>
 
@@ -57,6 +61,7 @@ const NFTMetadataCard = ({ metadata, tokenId }) => {
           description={metadata.description || "No description available."}
           interactiveUrl={metadata.interactive_url}
           onClose={() => setShowPopup(false)}
+          theme={theme} // Pass the theme to DescriptionPopup
         />
       )}
     </div>
