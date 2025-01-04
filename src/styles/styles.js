@@ -99,36 +99,54 @@ const styles = {
       alignItems: "center",
       zIndex: 1000,
     },
-    ppopupContent: {
-        backgroundColor: "#fff",
-        borderRadius: "8px",
-        padding: "20px",
-        maxWidth: "500px",
-        width: "90%",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-        maxHeight: "80vh", // Limit the height of the popup
-        overflow: "hidden", // Ensure the content doesn't overflow
-        display: "flex",
-        flexDirection: "column",
-      },
-      scrollableDescription: {
-        flex: 1, // Take up remaining space
-        overflowY: "auto", // Enable vertical scrolling
-        marginBottom: "16px", // Add some spacing
-      },
-
-    popupDescription: {
-      fontSize: "1rem",
-      color: "#333",
-      margin: 0,
+    popupContent: {
+      backgroundColor: "#fff",
+      borderRadius: "8px",
+      padding: "20px",
+      maxWidth: "500px",
+      width: "90%",
+      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+      maxHeight: "80vh", // Limit the height of the popup
+      overflow: "hidden", // Ensure the content doesn't overflow
+      display: "flex",
+      flexDirection: "column",
+    },
+    iframeContainer: {
+      flex: "0 0 auto", // Don't grow or shrink
+      marginBottom: "16px", // Add spacing below the iframe
     },
     interactiveIframe: {
       width: "100%",
-      height: "50vh",
-      minHeight: "300px",
+      height: "300px", // Fixed height for the iframe
       border: "none",
       borderRadius: "8px",
-      marginBottom: "16px",
+    },
+    descriptionContainer: {
+      flex: 1, // Take up remaining space
+      overflowY: "auto", // Enable vertical scrolling
+      marginBottom: "16px", // Add spacing below the description
+      scrollbarWidth: "thin", // For Firefox
+      scrollbarColor: "#888 transparent", // For Firefox
+      "&::-webkit-scrollbar": {
+        width: "8px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#888",
+        borderRadius: "4px",
+      },
+      "&::-webkit-scrollbar-track": {
+        backgroundColor: "transparent",
+      },
+    },
+    popupDescription: {
+      fontSize: "1rem",
+      color: "#333",
+      margin: 0, // Remove default margin
+    },
+    buttonContainer: {
+      display: "flex",
+      justifyContent: "flex-end",
+      gap: "10px", // Add spacing between buttons
     },
     expandButton: {
       background: "#28a745",
@@ -138,7 +156,6 @@ const styles = {
       borderRadius: "4px",
       cursor: "pointer",
       fontSize: "1rem",
-      marginRight: "10px",
     },
     closeButton: {
       background: "#007bff",
@@ -148,6 +165,18 @@ const styles = {
       borderRadius: "4px",
       cursor: "pointer",
       fontSize: "1rem",
+    },
+    readMoreButton: {
+      background: "none",
+      border: "none",
+      color: "#007bff",
+      cursor: "pointer",
+      fontSize: "0.9rem",
+      padding: "0",
+      marginTop: "8px",
+      "&:hover": {
+        textDecoration: "underline",
+      },
     },
     pagination: {
       display: "flex",
