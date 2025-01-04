@@ -8,34 +8,39 @@ const DescriptionPopup = ({ description, interactiveUrl, onClose }) => {
   return (
     <div style={styles.popupOverlay}>
       <div style={styles.popupContent}>
+        {/* Iframe Section */}
         {interactiveUrl && (
-          <iframe
-            src={interactiveUrl}
-            title="Interactive Content"
-            style={styles.interactiveIframe}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            frameBorder="0"
-            allowFullScreen
-          />
+          <div style={styles.iframeContainer}>
+            <iframe
+              src={interactiveUrl}
+              title="Interactive Content"
+              style={styles.interactiveIframe}
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              frameBorder="0"
+              allowFullScreen
+            />
+          </div>
         )}
 
-        {/* Add a scrollable container for the description */}
-        <div style={styles.scrollableDescription}>
+        {/* Description Section */}
+        <div style={styles.descriptionContainer}>
           <p style={styles.popupDescription}>{cleanedDescription}</p>
         </div>
 
-        {interactiveUrl && (
-          <button
-            onClick={() => window.open(interactiveUrl, "_blank")}
-            style={styles.expandButton}
-          >
-            Expand View
+        {/* Buttons Section */}
+        <div style={styles.buttonContainer}>
+          {interactiveUrl && (
+            <button
+              onClick={() => window.open(interactiveUrl, "_blank")}
+              style={styles.expandButton}
+            >
+              Expand View
+            </button>
+          )}
+          <button onClick={onClose} style={styles.closeButton}>
+            Close
           </button>
-        )}
-
-        <button onClick={onClose} style={styles.closeButton}>
-          Close
-        </button>
+        </div>
       </div>
     </div>
   );
