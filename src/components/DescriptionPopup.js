@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../styles/styles"; 
-import cleanDescription from "../utils/cleanDescription"; // Import as defaultimport styles from "../styles/styles";
+import cleanDescription from "../utils/cleanDescription";
+import styles from "../styles/styles";
 
 const DescriptionPopup = ({ description, interactiveUrl, onClose }) => {
   const cleanedDescription = cleanDescription(description);
@@ -19,7 +19,10 @@ const DescriptionPopup = ({ description, interactiveUrl, onClose }) => {
           />
         )}
 
-        <p style={styles.popupDescription}>{cleanedDescription}</p>
+        {/* Add a scrollable container for the description */}
+        <div style={styles.scrollableDescription}>
+          <p style={styles.popupDescription}>{cleanedDescription}</p>
+        </div>
 
         {interactiveUrl && (
           <button
